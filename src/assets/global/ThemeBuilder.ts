@@ -3,15 +3,20 @@ import { createTheme } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import components from "./Override";
 import type { RootState } from "../../redux/app/store";
-import {
-  ThemeType
-} from "../../redux/types/custumizerConstant";
-
-const SidebarWidth = 265;
-const TopbarHeight = 70;
+import { Config, ThemeType } from "../../redux/types/types";
 
 const baseTheme = {
   palette: {
+    primary: {
+      main: "#1a97f5",
+      light: "#e6f4ff",
+      dark: "#16g82d4",
+    },
+    secondary: {
+      main: "#1e4db7",
+      light: "#ddebff",
+      dark: "#173f98",
+    },
     success: {
       main: "#00c292",
       light: "#ebfaf2",
@@ -39,7 +44,7 @@ const baseTheme = {
     },
     action: {
       disabledBackground: "rgba(73,82,88,0.12)",
-      hoverOpacity: 0.10,
+      hoverOpacity: 0.1,
       hover: "rgba(0, 0, 0, 0.03)",
     },
   },
@@ -54,7 +59,7 @@ const themesOptions = [
       primary: {
         main: "#1a97f5",
         light: "#e6f4ff",
-        dark: "#1682d4",
+        dark: "#16g82d4",
       },
       secondary: {
         main: "#1e4db7",
@@ -78,25 +83,24 @@ const themesOptions = [
   },
 ];
 
-export interface Config {
-    theme: string;
-}
-
-
 export const BuildTheme = (config: Config) => {
   let themeOptions = themesOptions.find((theme) => theme.name === config.theme);
   const customize = useSelector((state: RootState) => state.custumize);
-console.log(config)
-console.log(themeOptions)
+
   const baseMode = {
     palette: {
-      mode: 'dark',
+      mode: customize.activeMode,
       background: {
-        default: customize.activeMode === "dark" ? "#20232a" : "#fafbfb",
+        default:
+          customize.activeMode === "dark" &&
+          customize.activeTheme === ThemeType.COKE_THEME
+            ? "#20232a"
+            : "#fafbfb",
         paper: customize.activeMode === "dark" ? "#282C34" : "#ffffff",
       },
       text: {
-        primary: customize.activeMode === "dark" ? "#e6e5e8" : "rgba(0, 0, 0, 0.87)",
+        primary:
+          customize.activeMode === "dark" ? "#e6e5e8" : "rgba(0, 0, 0, 0.87)",
         secondary: customize.activeMode === "dark" ? "#adb0bb" : "#777e89",
       },
     },
@@ -109,5 +113,3 @@ console.log(themeOptions)
   const theme = createTheme(_.merge({}, baseTheme, baseMode, themeOptions, {}));
   return theme;
 };
-
-export { TopbarHeight, SidebarWidth, baseTheme };

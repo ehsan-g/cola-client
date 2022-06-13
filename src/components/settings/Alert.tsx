@@ -1,38 +1,20 @@
-import React from "react";
 import {
   Grid,
   Stack,
   Button,
   IconButton,
   Collapse,
-   Card,
+  Typography,
 } from "@mui/material";
 import Alert from "@mui/material/Alert";
+import { useState } from "react";
 import BaseCard from "../../components/base-card/BaseCard";
 import PageContainer from "../../components/container/PageContainer";
-import CustomCard from "../../components/CustomCard";
-import { changeTheme } from "../../redux/features/customizerSlice";
-import {
-  ThemeType
-} from "../../redux/types/custumizerConstant";
-import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+
 
 const ExAlert = () => {
-  const dispatch = useAppDispatch()
 
-  const customize = useAppSelector((state) => state.custumize)
-  
-  const [open, setOpen] = React.useState(true);
-
-
-  const handleThemeChange = () => {
-    if (!customize) return;
-    if (customize.activeTheme === ThemeType.PEPSI_THEME) {
-      dispatch(changeTheme(ThemeType.COKE_THEME));
-    } else if (customize.activeTheme === ThemeType.COKE_THEME) {
-      dispatch(changeTheme(ThemeType.PEPSI_THEME));
-    }
-  };
+  const [open, setOpen] = useState(true);
 
   return (
     <PageContainer title="Alert" description="this is Alert page">
@@ -40,6 +22,8 @@ const ExAlert = () => {
         <Grid item xs={12} lg={6} sm={6} display="flex" alignItems="stretch">
           <BaseCard title="Filled Alert">
             <Stack spacing={1}>
+              {/* <h3>{data.species.name}</h3> */}
+              {/* <img src={data.sprites.front_shiny} alt={data.species.name} /> */}
               <Alert variant="filled" severity="error">
                 error!
               </Alert>
@@ -91,19 +75,14 @@ const ExAlert = () => {
                         setOpen(false);
                       }}
                     >
-                      hi
+                      <Typography color="primary">Hi</Typography>
                     </IconButton>
                   }
                 >
                   Close me!
                 </Alert>
               </Collapse>
-              <Button variant="outlined" onClick={handleThemeChange}>
-                Change Theme
-              </Button>
-              <Card elevation={10}>
-                  <CustomCard name={customize.activeTheme} />
-              </Card>
+  
             </Stack>
           </BaseCard>
         </Grid>

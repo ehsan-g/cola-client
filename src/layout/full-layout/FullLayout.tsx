@@ -2,6 +2,7 @@ import { experimentalStyled, Container, Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from '../../redux/app/store';
+import CustomBottomNavigation from "../../components/container/CustomBottomNavigation";
 
 const MainWrapper = experimentalStyled("div")(() => ({
   display: "flex",
@@ -37,6 +38,7 @@ const FullLayout = () => {
           <Box sx={{ minHeight: "calc(100vh - 170px)" }}>
             <Outlet />
           </Box>
+          <CustomBottomNavigation />
         </Container>
       </PageWrapper>
     </MainWrapper>

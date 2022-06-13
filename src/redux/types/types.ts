@@ -1,3 +1,7 @@
+export interface Config {
+  theme: string;
+}
+
 export enum ThemeType {
   PEPSI_THEME = "PEPSI_THEME",
   COKE_THEME = "COKE_THEME",
@@ -13,4 +17,8 @@ export enum UserType {
   USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS",
   USER_REGISTER_FAIL = "USER_REGISTER_FAIL",
   USER_REGISTER_RESET = "USER_REGISTER_RESET",
+}
+
+export enum Pokemon {
+  name = "Ehsan",
 }

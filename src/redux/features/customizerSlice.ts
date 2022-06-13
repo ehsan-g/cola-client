@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ThemeType } from "../types/custumizerConstant";
+import { ThemeType } from "../types/types";
 
 export interface CustomizeState {
-  activeTheme: string;
+  activeTheme: ThemeType;
   activeMode: "light" | "dark" | "loading";
-  status: "success" | "loading" | "failed";
+  status?: "success" | "loading" | "failed";
 }
 
 const initialState: CustomizeState = {
@@ -18,12 +18,12 @@ export const custumizerSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    changeTheme: (state, action: PayloadAction<string>) => {
-      state.activeTheme = action.payload;
+    changeTheme: (state, action: PayloadAction<CustomizeState>) => {
+      state.activeMode = action.payload.activeMode;
+      state.activeTheme = action.payload.activeTheme;
     },
   },
 });
-
 
 export const { changeTheme } = custumizerSlice.actions;
 export default custumizerSlice.reducer;

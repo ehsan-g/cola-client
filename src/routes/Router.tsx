@@ -9,7 +9,8 @@ const BlankLayout = Loadable(
 
 const Error = Loadable(lazy(() => import('../pages/authentication/Error')));
 
-const ExAlert = Loadable(lazy(() => import("../pages/alert/Alert")));
+const Buildings = Loadable(lazy(() => import("../pages/buildings")));
+const Settings = Loadable(lazy(() => import("../pages/settings")));
 
 const Router = [
   {
@@ -17,8 +18,9 @@ const Router = [
     element: <FullLayout />,
     children: [
       { path: '404', element: <Error /> },
-      { path: "/", element: <Navigate to="/alert" /> },
-      { path: "/alert", element: <ExAlert /> },
+      { path: "/", element: <Navigate to="/buildings" /> },
+      { path: "/buildings", element: <Buildings /> },
+      { path: "/settings", element: <Settings /> },
       { path: "*", element: <Navigate to="/auth/404" /> },
     ],
   },

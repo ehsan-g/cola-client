@@ -1,8 +1,8 @@
-import { BuildTheme } from "../../../assets/global/Theme-variable";
+import { BuildTheme } from "./ThemeBuilder";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/app/store";
+import type { RootState } from "../../redux/app/store";
 
-const ThemeSettings = () => {
+const ColaTheme = () => {
   const customize = useSelector((state: RootState) => state.custumize);
 
   const theme = BuildTheme({
@@ -11,4 +11,4 @@ const ThemeSettings = () => {
 
   return theme;
 };
-export default ThemeSettings;
+export default ColaTheme;
