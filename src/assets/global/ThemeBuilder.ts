@@ -95,7 +95,7 @@ export const BuildTheme = (config: Config) => {
       },
       text: {
         primary:
-          customize.activeMode === "dark" ? "#16g82d4" : "rgba(0, 0, 0, 0.87)",
+          customize.activeMode === "dark" ? "#e6e5e8" : "rgba(0, 0, 0, 0.87)",
         secondary: customize.activeMode === "dark" ? "#adb0bb" : "#777e89",
       },
     },

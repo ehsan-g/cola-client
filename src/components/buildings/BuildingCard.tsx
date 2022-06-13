@@ -24,7 +24,7 @@ export default function BuildingCard() {
             color="text.secondary"
             component="div"
           >
-            Mac Miller
+            Mac Millers Mac Millers
           </Typography>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
