@@ -1,7 +1,7 @@
 import { experimentalStyled, Container, Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import type { RootState } from '../../redux/app/store';
+import type { RootState } from "../../redux/app/store";
 import CustomBottomNavigation from "../../components/container/CustomBottomNavigation";
 
 const MainWrapper = experimentalStyled("div")(() => ({
@@ -17,7 +17,7 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
 
   backgroundColor: theme.palette.background.default,
   [theme.breakpoints.up("lg")]: {
-    paddingTop: '10px',
+    paddingTop: "10px",
   },
   [theme.breakpoints.down("lg")]: {
     paddingTop: "64px",
@@ -25,7 +25,7 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
 }));
 
 const FullLayout = () => {
-  const customize =useSelector((state: RootState) => state.custumize)
+  const customize = useSelector((state: RootState) => state.custumize);
   return (
     <MainWrapper className={customize.activeMode === "light" ? "dark" : ""}>
       <PageWrapper>

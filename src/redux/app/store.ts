@@ -1,8 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import * as Sentry from "@sentry/react";
-import logger from "redux-logger";
 import thunk from "redux-thunk";
-import { UserType } from "../types/types";
 import customizeReducer from "../features/customizerSlice";
 import { ThunkAction, Action } from "@reduxjs/toolkit";
 import { pokemonApi } from "../services/pokemon";

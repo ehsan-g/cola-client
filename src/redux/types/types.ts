@@ -3,8 +3,13 @@ export interface Config {
 }
 
 export enum ThemeType {
-  PEPSI_THEME = "PEPSI_THEME",
-  COKE_THEME = "COKE_THEME",
+  PEPSI = "PEPSI_THEME",
+  COKE = "COKE_THEME",
+}
+
+export enum ModeType {
+  DARK = "dark",
+  LIGHT = "light",
 }
 
 export enum UserType {

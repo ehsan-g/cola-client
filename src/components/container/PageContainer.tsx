@@ -1,6 +1,14 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
-const PageContainer = ({ title, description, children }:{title:string, description:string, children:any}) => (
+const PageContainer = ({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description: string;
+  children: any;
+}) => (
   <div>
     <Helmet>
       <title>{title}</title>
@@ -9,6 +17,5 @@ const PageContainer = ({ title, description, children }:{title:string, descripti
     {children}
   </div>
 );
-
 
 export default PageContainer;

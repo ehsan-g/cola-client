@@ -1,11 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Card, CardHeader, CardContent, Divider } from '@mui/material';
+import PropTypes from "prop-types";
+import { Card, CardHeader, CardContent, Divider } from "@mui/material";
 
-const BaseCard = ({ title, children }: { title:string, children:any }) => (
+const BaseCard = ({ title, children }: { title: string; children: any }) => (
   <Card
     sx={{
-      width: '100%',
+      width: "100%",
       p: 0,
     }}
   >

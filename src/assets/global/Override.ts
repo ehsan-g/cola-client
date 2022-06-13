@@ -10,18 +10,18 @@ const components = {
     },
   },
 
-  MuiButton: {
-    styleOverrides: {
-      root: {
-        textTransform: "none" as const,
-        boxShadow: 'none',
-        fontSize: '15px',
-        '&:hover': {
-          boxShadow: 'none',
-        },
-      },
-    },
-  },
+  // MuiButton: {
+  //   styleOverrides: {
+  //     root: {
+  //       textTransform: "none" as const,
+  //       boxShadow: 'none',
+  //       fontSize: '15px',
+  //       '&:hover': {
+  //         boxShadow: 'none',
+  //       },
+  //     },
+  //   },
+  // },
 
   MuiCard: {
     styleOverrides: {

@@ -54,7 +54,7 @@ const baseTheme = {
 
 const themesOptions = [
   {
-    name: ThemeType.PEPSI_THEME,
+    name: ThemeType.PEPSI,
     palette: {
       primary: {
         main: "#1a97f5",
@@ -69,7 +69,7 @@ const themesOptions = [
     },
   },
   {
-    name: ThemeType.COKE_THEME,
+    name: ThemeType.COKE,
     palette: {
       primary: {
         main: "#ff5c8e",
@@ -86,21 +86,16 @@ const themesOptions = [
 export const BuildTheme = (config: Config) => {
   let themeOptions = themesOptions.find((theme) => theme.name === config.theme);
   const customize = useSelector((state: RootState) => state.custumize);
-
   const baseMode = {
     palette: {
       mode: customize.activeMode,
       background: {
-        default:
-          customize.activeMode === "dark" &&
-          customize.activeTheme === ThemeType.COKE_THEME
-            ? "#20232a"
-            : "#fafbfb",
+        default: customize.activeMode === "dark" ? "#20232a" : "#fafbfb",
         paper: customize.activeMode === "dark" ? "#282C34" : "#ffffff",
       },
       text: {
         primary:
-          customize.activeMode === "dark" ? "#e6e5e8" : "rgba(0, 0, 0, 0.87)",
+          customize.activeMode === "dark" ? "#16g82d4" : "rgba(0, 0, 0, 0.87)",
         secondary: customize.activeMode === "dark" ? "#adb0bb" : "#777e89",
       },
     },
@@ -109,6 +104,8 @@ export const BuildTheme = (config: Config) => {
     console.warn(new Error(`The theme ${config.theme} is not valid`));
     [themeOptions] = themesOptions;
   }
+
+  console.log(config);
 
   const theme = createTheme(_.merge({}, baseTheme, baseMode, themeOptions, {}));
   return theme;

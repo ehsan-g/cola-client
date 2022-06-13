@@ -1,14 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ThemeType } from "../types/types";
+import { createSlice } from "@reduxjs/toolkit";
+import { ModeType, ThemeType } from "../types/types";
 
 export interface CustomizeState {
-  activeTheme: ThemeType;
-  activeMode: "light" | "dark" | "loading";
+  activeTheme?: ThemeType;
+  activeMode?: "light" | "dark" | "loading";
   status?: "success" | "loading" | "failed";
 }
 
 const initialState: CustomizeState = {
-  activeTheme: ThemeType.PEPSI_THEME, // PEPSI_THEME or COKE_THEME
+  activeTheme: ThemeType.PEPSI, // PEPSI or COKE
   activeMode: "dark", // light or dark
   status: "loading",
 };
@@ -18,12 +18,22 @@ export const custumizerSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    changeTheme: (state, action: PayloadAction<CustomizeState>) => {
-      state.activeMode = action.payload.activeMode;
-      state.activeTheme = action.payload.activeTheme;
+    changeTheme: (state) => {
+      if (state.activeTheme === ThemeType.PEPSI) {
+        state.activeTheme = ThemeType.COKE;
+      } else if (state.activeTheme === ThemeType.COKE) {
+        state.activeTheme = ThemeType.PEPSI;
+      }
+    },
+    changeMode: (state) => {
+      if (state.activeMode === ModeType.DARK) {
+        state.activeMode = ModeType.LIGHT;
+      } else if (state.activeMode === ModeType.LIGHT) {
+        state.activeMode = ModeType.DARK;
+      }
     },
   },
 });
 
-export const { changeTheme } = custumizerSlice.actions;
+export const { changeTheme, changeMode } = custumizerSlice.actions;
 export default custumizerSlice.reducer;
