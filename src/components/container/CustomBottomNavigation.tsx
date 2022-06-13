@@ -1,4 +1,4 @@
-import  {useRef, useState,  forwardRef}from "react";
+import  {useRef}from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -9,11 +9,8 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import {
   matchPath,
   useLocation,
-  Route,
-  Routes,
   Link,
 } from 'react-router-dom';
-import { Typography } from "@mui/material";
 
 
   function useRouteMatch(patterns: readonly string[]) {
@@ -31,22 +28,11 @@ import { Typography } from "@mui/material";
   }
   
 
-function CurrentRoute() {
-  const location = useLocation();
-
-  return (
-    <Typography variant="body2" sx={{ pb: 2 }} color="text.secondary">
-      Current route: {location.pathname}
-    </Typography>
-  );
-}
-
 export default function CustomBottomNavigation() {
   const ref = useRef<HTMLDivElement>(null);
 
-  const routeMatch = useRouteMatch(['/inbox/:id', '/buildings', '/settings']);
+  const routeMatch = useRouteMatch([ '/buildings', '/settings']);
   const currentTab = routeMatch?.pattern?.path;
-  console.log(currentTab)
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
@@ -55,9 +41,6 @@ export default function CustomBottomNavigation() {
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}
       >
-        <Routes>
-          <Route path="*" element={<CurrentRoute />} />
-        </Routes>
         <BottomNavigation
           showLabels
           value={currentTab=== '/buildings' ? 0: 1}
