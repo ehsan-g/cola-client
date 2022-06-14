@@ -105,8 +105,6 @@ export const BuildTheme = (config: Config) => {
     [themeOptions] = themesOptions;
   }
 
-  console.log(config);
-
   const theme = createTheme(_.merge({}, baseTheme, baseMode, themeOptions, {}));
   return theme;
 };

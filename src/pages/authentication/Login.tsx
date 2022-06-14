@@ -18,8 +18,6 @@ function Login() {
     }
   };
 
-  console.log(errors);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Async Submit Validation</h1>
