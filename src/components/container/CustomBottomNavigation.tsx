@@ -38,9 +38,6 @@ export default function CustomBottomNavigation() {
         <BottomNavigation
           showLabels
           value={currentTab === "/buildings" ? 0 : 1}
-          onChange={(event, newValue) => {
-            console.log(event, newValue);
-          }}
         >
           <BottomNavigationAction
             component={Link}

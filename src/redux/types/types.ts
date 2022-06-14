@@ -2,6 +2,17 @@ export interface Config {
   theme: string;
 }
 
+// export interface userAPI {
+//   id: number;
+//   building_name: string;
+//   description: string;
+//   company: string;
+// }
+
+export declare const userAPI: {
+  fetchBuildingList<Response>(): { data: Response };
+};
+
 export enum ThemeType {
   PEPSI = "PEPSI_THEME",
   COKE = "COKE_THEME",
@@ -24,6 +35,6 @@ export enum UserType {
   USER_REGISTER_RESET = "USER_REGISTER_RESET",
 }
 
-export enum Pokemon {
+export enum Building {
   name = "Ehsan",
 }

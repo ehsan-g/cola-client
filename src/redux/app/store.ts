@@ -3,8 +3,8 @@ import * as Sentry from "@sentry/react";
 import thunk from "redux-thunk";
 import customizeReducer from "../features/customizerSlice";
 import { ThunkAction, Action } from "@reduxjs/toolkit";
-import { pokemonApi } from "../services/pokemon";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import buildingsReducer from "../features/buildings/buildingsSlice";
 
 const sentryReduxEnhancer = Sentry.createReduxEnhancer({
   actionTransformer: (action) => {
@@ -24,8 +24,8 @@ const sentryReduxEnhancer = Sentry.createReduxEnhancer({
 const preloadedState = {};
 
 const reducer = {
-  [pokemonApi.reducerPath]: pokemonApi.reducer,
   custumize: customizeReducer,
+  buildings: buildingsReducer,
 };
 
 export const store = configureStore({
@@ -33,8 +33,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       // .concat(logger)
-      .concat(thunk)
-      .concat(pokemonApi.middleware),
+      .concat(thunk),
+  // .concat(buildingApi.middleware),
 
   devTools: process.env.NODE_ENV !== "production",
   preloadedState,

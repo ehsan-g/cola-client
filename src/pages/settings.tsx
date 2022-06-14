@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
 import ExAlert from "../components/settings/Alert";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { fetchBuildings } from "../redux/features/buildings/buildingsSlice";
 
 export default function Settings() {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ export default function Settings() {
   const handleThemeChange = () => {
     if (!customize) return;
     dispatch(changeMode());
+    dispatch(fetchBuildings());
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

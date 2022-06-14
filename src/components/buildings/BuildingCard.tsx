@@ -8,9 +8,12 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import ColaTheme from "../../assets/global/ColaTheme";
+import { useAppSelector } from "../../redux/app/hooks";
 
 export default function BuildingCard() {
   const theme = ColaTheme();
+
+  const { buildings } = useAppSelector((state) => state.buildings);
 
   return (
     <Card sx={{ display: "flex" }}>
