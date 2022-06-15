@@ -2,12 +2,21 @@ export interface Config {
   theme: string;
 }
 
-// export interface userAPI {
-//   id: number;
-//   building_name: string;
-//   description: string;
-//   company: string;
-// }
+export interface BuildingImage {
+  id: number;
+  image: string;
+  alt_text: string;
+  created_at: string;
+  updated_at: string;
+  building: number;
+}
+export interface Building {
+  id?: number;
+  building_name?: string;
+  description?: string;
+  company?: string;
+  image?: BuildingImage;
+}
 
 export declare const userAPI: {
   fetchBuildingList<Response>(): { data: Response };
@@ -33,8 +42,4 @@ export enum UserType {
   USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS",
   USER_REGISTER_FAIL = "USER_REGISTER_FAIL",
   USER_REGISTER_RESET = "USER_REGISTER_RESET",
-}
-
-export enum Building {
-  name = "Ehsan",
 }

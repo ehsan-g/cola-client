@@ -1,24 +1,23 @@
-import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const BUILDINGS_URL = "http://127.0.0.1:8000/api/v1/buildings";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { publicApi } from "../../apis/base";
+import { Building } from "../../types/types";
 
 export interface CustomizeState {
   buildings: object[];
   status: "idle" | "loading" | "succeeded" | "failed";
-  error: null;
+  error: string | undefined;
 }
 
-const initialState = {
+const initialState: CustomizeState = {
   buildings: [],
   status: "idle",
-  error: null,
+  error: "",
 };
 
 export const fetchBuildings = createAsyncThunk(
-  "posts/fetchBuildings",
+  "buildings/fetchAll",
   async () => {
-    const response = await axios.get(BUILDINGS_URL);
+    const response = await publicApi.get("buildings");
     return response.data;
   }
 );
@@ -39,13 +38,12 @@ const buildingsSlice = createSlice({
     builder
       .addCase(fetchBuildings.pending, (state, action) => {
         state.status = "loading";
+        state.buildings = [];
       })
       .addCase(fetchBuildings.fulfilled, (state, action) => {
-        // Adding date and reactions
-        console.log(action);
-        const loadedBuildings = action.payload.products.map(
-          (building: { building_name: string }) => {
-            return building.building_name;
+        const loadedBuildings = action.payload.buildings.map(
+          (building: Building) => {
+            return building;
           }
         );
         state.status = "succeeded";
@@ -55,7 +53,7 @@ const buildingsSlice = createSlice({
       })
       .addCase(fetchBuildings.rejected, (state, action) => {
         state.status = "failed";
-        // state.error = action.error.message;
+        state.error = action.error.message;
       });
   },
 });

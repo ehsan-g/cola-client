@@ -15,5 +15,6 @@
     "isolatedModules": true,
     "noEmit": true,
   },
-  "include": ["src"]
+  "include": ["env.d.ts", "**/*.ts", "**/*.tsx", "src/setupProxy.ts"],
+  "exclude": ["node_modules"],
 }
