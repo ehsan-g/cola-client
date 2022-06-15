@@ -38,6 +38,7 @@ export default function CustomBottomNavigation() {
         <BottomNavigation
           showLabels
           value={currentTab === "/buildings" ? 0 : 1}
+          color="primary"
         >
           <BottomNavigationAction
             component={Link}

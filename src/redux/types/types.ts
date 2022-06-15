@@ -10,17 +10,28 @@ export interface BuildingImage {
   updated_at: string;
   building: number;
 }
+export interface Address {
+  id: number;
+  country: string;
+  city: string;
+  address: string;
+  created_at: string;
+  building: number;
+}
 export interface Building {
   id?: number;
   building_name?: string;
   description?: string;
-  company?: string;
+  company?: number;
   image?: BuildingImage;
+  address?: Address;
 }
 
-export declare const userAPI: {
-  fetchBuildingList<Response>(): { data: Response };
-};
+export enum CompanyType {
+  NONE = 0,
+  PEPSI = 1,
+  COKE = 2,
+}
 
 export enum ThemeType {
   PEPSI = "PEPSI_THEME",

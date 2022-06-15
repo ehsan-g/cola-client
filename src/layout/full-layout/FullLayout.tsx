@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/app/store";
 import CustomBottomNavigation from "../../components/container/CustomBottomNavigation";
+import CustomAppBar from "../../components/container/CustomAppBar";
 
 const MainWrapper = experimentalStyled("div")(() => ({
   display: "flex",
@@ -19,9 +20,6 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     paddingTop: "10px",
   },
-  [theme.breakpoints.down("lg")]: {
-    paddingTop: "64px",
-  },
 }));
 
 const FullLayout = () => {
@@ -29,13 +27,14 @@ const FullLayout = () => {
   return (
     <MainWrapper className={customize.activeMode === "light" ? "dark" : ""}>
       <PageWrapper>
-        <Container
-          maxWidth={false}
-          sx={{
-            paddingTop: "20px",
-          }}
-        >
-          <Box sx={{ minHeight: "calc(100vh - 170px)" }}>
+        <Container maxWidth={false}>
+          <CustomAppBar />
+          <Box
+            sx={{
+              minHeight: "calc(100vh - 170px)",
+              paddingTop: "60px",
+            }}
+          >
             <Outlet />
           </Box>
           <CustomBottomNavigation />

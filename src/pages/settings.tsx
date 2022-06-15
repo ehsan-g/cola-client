@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import { FormControlLabel, FormGroup, IconButton, Switch } from "@mui/material";
+import { FormControlLabel, FormGroup, IconButton } from "@mui/material";
 import { changeMode, changeTheme } from "../redux/features/customizerSlice";
 import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
 import ExAlert from "../components/settings/Alert";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import CustomSwitch from "../components/CustomSwitch";
 
 export default function Settings() {
   const dispatch = useAppDispatch();
@@ -47,17 +48,11 @@ export default function Settings() {
       </Box>
       <FormGroup>
         <FormControlLabel
-          control={
-            <Switch
-              checked={checked}
-              onChange={handleChange}
-              inputProps={{ "aria-label": "controlled" }}
-            />
-          }
+          control={<CustomSwitch checked={checked} onChange={handleChange} />}
           label={customize.activeTheme}
         />
       </FormGroup>
-
+      <CustomSwitch checked={checked} onChange={handleChange} />
       <ExAlert />
     </Box>
   );

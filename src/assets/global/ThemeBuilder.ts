@@ -13,9 +13,10 @@ const baseTheme = {
       dark: "#16g82d4",
     },
     secondary: {
-      main: "#1e4db7",
-      light: "#ddebff",
+      main: "#8338ec",
+      light: "#f2cc8f",
       dark: "#173f98",
+      contrastText: "#ffcc00",
     },
     success: {
       main: "#00c292",
@@ -57,7 +58,7 @@ const themesOptions = [
     name: ThemeType.PEPSI,
     palette: {
       primary: {
-        main: "#1a97f5",
+        main: "#4ea4e2",
         light: "#e6f4ff",
         dark: "#16g82d4",
       },
@@ -72,7 +73,7 @@ const themesOptions = [
     name: ThemeType.COKE,
     palette: {
       primary: {
-        main: "#ff5c8e",
+        main: "#f2d5d3",
         light: "#fce6ed",
         dark: "#d43653",
       },
@@ -95,8 +96,8 @@ export const BuildTheme = (config: Config) => {
       },
       text: {
         primary:
-          customize.activeMode === "dark" ? "#e6e5e8" : "rgba(0, 0, 0, 0.87)",
-        secondary: customize.activeMode === "dark" ? "#adb0bb" : "#777e89",
+          customize.activeMode === "dark" ? "white" : "rgba(0, 0, 0, 0.87)",
+        secondary: customize.activeMode === "dark" ? "white" : "#777e89",
       },
     },
   };
