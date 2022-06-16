@@ -6,18 +6,24 @@ import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
 import { fetchBuildings } from "../redux/features/buildings/buildingsSlice";
 import BuildingCard from "../components/buildings/BuildingCard";
 import { Building } from "../redux/types/types";
+import { fetchProfile } from "../redux/features/auth/userSlice";
 
 export default function Buildings() {
   const dispatch = useAppDispatch();
 
-  const { buildings } = useAppSelector((state) => state.buildings);
-  const { user } = useAppSelector((state) => state.user);
+  const { status: buildingStatus, buildings } = useAppSelector(
+    (state) => state.buildings
+  );
+  const { profile, status: userStatus } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (!buildings[0] && user) {
+    console.log(buildingStatus, profile);
+    if (buildingStatus !== "succeeded" && profile) {
       dispatch(fetchBuildings());
+    } else if (!profile) {
+      dispatch(fetchProfile());
     }
-  }, [user]);
+  }, [profile, userStatus]);
 
   return (
     <Box sx={{ pb: 7 }}>

@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import {
   changeMode,
   changeTheme,
-} from "../redux/features/themCustomization/customizerSlice";
+} from "../redux/features/themeCustomization/customizerSlice";
 import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
 import ExAlert from "../components/settings/Alert";
 import Brightness4Icon from "@mui/icons-material/Brightness4";

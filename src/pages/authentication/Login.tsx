@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import * as yup from "yup";
-import { login } from "../../redux/features/auth/userSlice";
+import { fetchProfile, login } from "../../redux/features/auth/userSlice";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -46,19 +46,21 @@ function Login() {
   const redirect = location.search
     ? // eslint-disable-next-line no-restricted-globals
       location.search.split("redirect=")[1]
-    : "/";
+    : "";
 
-  const userInfo = localStorage.getItem("userInfo")
-    ? localStorage.getItem("userInfo")
-    : false;
-
-  const { status } = useAppSelector((state) => state.user);
+  const { user, profile } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (status === "succeeded" || userInfo) {
+    if (user && !profile) {
+      dispatch(fetchProfile());
+    }
+  }, [user, profile, dispatch]);
+
+  useEffect(() => {
+    if (user) {
       navigate(`/settings${redirect}`);
     }
-  }, [redirect, status, navigate, userInfo]);
+  }, [redirect, navigate, user]);
 
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(LoginSchema),

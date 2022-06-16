@@ -26,27 +26,25 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
 }));
 
 const FullLayout = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const redirect = location.search
     ? // eslint-disable-next-line no-restricted-globals
       location.search.split("redirect=")[1]
-    : "/";
+    : "";
 
   const customize = useSelector((state: RootState) => state.custumize);
 
-  const { status } = useAppSelector((state) => state.user);
-
-  const userInfo = localStorage.getItem("userInfo")
-    ? localStorage.getItem("userInfo")
-    : false;
+  const { profile, user } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (status !== "succeeded" && !userInfo) {
+    if (!user && !profile) {
+      console.log("hala");
       navigate(`/auth/login${redirect}`);
     }
-  }, [redirect, status, navigate, userInfo]);
+  }, [redirect, user, profile]);
 
   return (
     <MainWrapper className={customize.activeMode === "light" ? "dark" : ""}>

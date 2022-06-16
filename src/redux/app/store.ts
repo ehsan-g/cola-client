@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import * as Sentry from "@sentry/react";
 import thunk from "redux-thunk";
-import customizeReducer from "../features/themCustomization/customizerSlice";
+import customizeReducer from "../features/themeCustomization/customizerSlice";
 import { ThunkAction, Action } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import buildingsReducer from "../features/buildings/buildingsSlice";

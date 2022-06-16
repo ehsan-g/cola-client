@@ -22,19 +22,18 @@ const initialState: BuildingState = {
   error: "",
 };
 
-const userJson = localStorage.getItem("userInfo");
-const userInfo = userJson !== null ? JSON.parse(userJson) : {};
-
-const config: Config = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${userInfo.token}`,
-  },
-};
-
 export const fetchBuildings = createAsyncThunk(
   "buildings/fetchAll",
   async () => {
+    const userJson = localStorage.getItem("userInfo");
+    const userInfo = userJson !== null ? JSON.parse(userJson) : {};
+
+    const config: Config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
     const response = await publicApi.get("buildings", config);
     return response.data;
   }
@@ -71,7 +70,6 @@ const buildingsSlice = createSlice({
       })
       .addCase(fetchBuildings.rejected, (state, action) => {
         state.status = "failed";
-        console.log(action);
         state.error = action.error.message;
       });
   },

@@ -14,7 +14,5 @@ if (env === "prod") {
   envApiUrl = `http://${process.env.REACT_APP_DOMAIN_LOCAL}/api/v1`;
 }
 
-console.log(envApiUrl);
-
 const apiUrl = envApiUrl;
 export default apiUrl;
