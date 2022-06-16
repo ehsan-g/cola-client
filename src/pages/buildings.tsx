@@ -11,12 +11,13 @@ export default function Buildings() {
   const dispatch = useAppDispatch();
 
   const { buildings } = useAppSelector((state) => state.buildings);
+  const { user } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (!buildings[0]) {
+    if (!buildings[0] && user) {
       dispatch(fetchBuildings());
     }
-  }, []);
+  }, [user]);
 
   return (
     <Box sx={{ pb: 7 }}>
