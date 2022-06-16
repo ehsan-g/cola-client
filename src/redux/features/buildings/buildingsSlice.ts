@@ -58,6 +58,7 @@ const buildingsSlice = createSlice({
         state.buildings = [];
       })
       .addCase(fetchBuildings.fulfilled, (state, action) => {
+        state.buildings = [];
         const loadedBuildings = action.payload.buildings.map(
           (building: Building) => {
             return building;

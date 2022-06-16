@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/app/store";
 import CustomBottomNavigation from "../../components/container/CustomBottomNavigation";
 import CustomAppBar from "../../components/container/CustomAppBar";
-import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+import { useAppSelector } from "../../redux/app/hooks";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -26,7 +26,6 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
 }));
 
 const FullLayout = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
