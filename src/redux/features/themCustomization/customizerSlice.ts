@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ModeType, ThemeType } from "../types/types";
+import { ModeType, ThemeType } from "../../types/types";
 
 export interface CustomizeState {
   activeTheme?: ThemeType;
@@ -8,7 +8,7 @@ export interface CustomizeState {
 }
 
 const initialState: CustomizeState = {
-  activeTheme: ThemeType.PEPSI, // PEPSI or COKE
+  activeTheme: ThemeType.COKE, // PEPSI or COKE
   activeMode: "dark", // light or dark
   status: "loading",
 };

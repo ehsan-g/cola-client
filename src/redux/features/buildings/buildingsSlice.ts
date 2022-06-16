@@ -1,23 +1,41 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { publicApi } from "../../apis/base";
 import { Building } from "../../types/types";
+import userSlice from "../auth/userSlice";
 
-export interface CustomizeState {
+export interface BuildingState {
   buildings: object[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | undefined;
 }
 
-const initialState: CustomizeState = {
+export interface Config {
+  headers: {
+    "Content-Type": "application/json";
+    Authorization: any;
+  };
+}
+
+const initialState: BuildingState = {
   buildings: [],
   status: "idle",
   error: "",
 };
 
+const userJson = localStorage.getItem("userInfo");
+const userInfo = userJson !== null ? JSON.parse(userJson) : {};
+
+const config: Config = {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${userInfo.token}`,
+  },
+};
+
 export const fetchBuildings = createAsyncThunk(
   "buildings/fetchAll",
   async () => {
-    const response = await publicApi.get("buildings");
+    const response = await publicApi.get("buildings", config);
     return response.data;
   }
 );
@@ -53,6 +71,7 @@ const buildingsSlice = createSlice({
       })
       .addCase(fetchBuildings.rejected, (state, action) => {
         state.status = "failed";
+        console.log(action);
         state.error = action.error.message;
       });
   },

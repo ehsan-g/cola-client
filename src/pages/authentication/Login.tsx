@@ -1,25 +1,31 @@
 import {
-  Alert,
   Button,
   Card,
   CardMedia,
-  Container,
   Divider,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+import * as yup from "yup";
+import { login } from "../../redux/features/auth/userSlice";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#8338ec",
   },
   "& .MuiOutlinedInput-root": {
+    color: "black",
+
     "& fieldset": {
       borderRadius: 20,
+      borderColor: "#8338ec",
     },
     "&.Mui-focused fieldset": {
       borderColor: "#8338ec",
@@ -27,16 +33,43 @@ const CssTextField = styled(TextField)({
   },
 });
 
-function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const LoginSchema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string(),
+});
 
-  const handleClick = () => {
-    console.log("hi");
+function Login() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirect = location.search
+    ? // eslint-disable-next-line no-restricted-globals
+      location.search.split("redirect=")[1]
+    : "/";
+
+  const userInfo = localStorage.getItem("userInfo")
+    ? localStorage.getItem("userInfo")
+    : false;
+
+  const { status } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (status === "succeeded" || userInfo) {
+      navigate(`/settings${redirect}`);
+    }
+  }, [redirect, status, navigate, userInfo]);
+
+  const { register, handleSubmit } = useForm({
+    resolver: yupResolver(LoginSchema),
+  });
+
+  const onSubmit = (data: any) => {
+    dispatch(login({ user: { email: data.email, password: data.password } }));
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Card
         sx={{
           position: "relative",
@@ -44,22 +77,18 @@ function Login() {
           p: 0,
         }}
       >
-        <Typography variant="h5" color="secondary" sx={{ textAlign: "center" }}>
-          Sign In
-        </Typography>
         <CardMedia
           component="img"
-          sx={{ width: 100 }}
+          sx={{ width: 100, marginTop: 9 }}
           image="/images/logo.png"
           alt="logo"
         />
         <Card
           style={{
             position: "absolute",
-            color: "black",
             bottom: "10px",
-            height: "80vh",
-            backgroundColor: "#a09bab",
+            height: "65vh",
+            backgroundColor: "white",
             margin: 0,
             width: "100%",
           }}
@@ -72,45 +101,52 @@ function Login() {
               <CssTextField
                 id="username-login"
                 type="email"
-                value={username}
-                onChange={(e: any) => setUsername(e.target.value)}
                 label="username"
                 variant="outlined"
                 fullWidth
                 sx={{ borderRadius: "10px" }}
-                required
+                {...register("email")}
               />
             </Grid>
             <Grid item xs={12} sx={{ marginTop: 1, width: "90%" }}>
               <TextField
                 color="secondary"
-                value={password}
                 type="password"
-                onChange={(e) => setPassword(e.target.value)}
                 label="Password"
                 variant="outlined"
                 fullWidth
-                required
+                {...register("password")}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    color: "black",
+                  },
+                }}
               />
               <Typography sx={{ direction: "rtl" }}>
                 ?Forgot Password
               </Typography>
             </Grid>
             <Grid item xs={12} sx={{ marginTop: 1 }}>
-              <Button variant="outlined" onClick={handleClick}>
+              <Button variant="contained" type="submit">
                 Login
               </Button>
             </Grid>
             {/* {error && (
-                <Grid sx={{ marginTop: 2 }}>
-                  <Alert variant="" severity="error">
-                    {error}
-                  </Alert>
-                </Grid>
-              )} */}
+              <Grid sx={{ marginTop: 2 }}>
+                <Alert variant="" severity="error">
+                  {error}
+                </Alert>
+              </Grid>
+            )} */}
           </Grid>
-          <Divider sx={{ marginTop: 4, marginBottom: 4 }}>
-            <Typography variant="subtitle1"> OR </Typography>
+          <Divider
+            color="primary.light"
+            sx={{
+              marginTop: 4,
+              marginBottom: 4,
+            }}
+          >
+            <Typography> OR </Typography>
           </Divider>
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12} sx={{ width: "100%" }}>
@@ -118,7 +154,7 @@ function Login() {
                 Connect Wallet
               </Button>
             </Grid>
-            <Grid item xs={12} sx={{ marginTop: 10 }}>
+            <Grid item xs={12} sx={{ marginTop: 6 }}>
               <Typography>
                 Don&apos;t have an account? <Link to="/register">Register</Link>
               </Typography>

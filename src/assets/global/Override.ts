@@ -48,14 +48,6 @@ const components = {
     },
   },
 
-  MuiCardHeader: {
-    styleOverrides: {
-      root: {
-        // color: "white",
-      },
-    },
-  },
-
   MuiCard: {
     styleOverrides: {
       root: {
@@ -82,38 +74,46 @@ const components = {
       },
     },
   },
-  MuiButton: {
-    defaultProps: {
-      // disableRipple: true, // No more ripple!
-    },
-    styleOverrides: {
-      root: {
-        textTransform: "none" as const,
-        boxShadow: "none",
-        fontSize: "15px",
-        "&:hover": {
-          boxShadow: "none",
-        },
-        containedPrimary: {
-          minWidth: "140px",
-          background: "black",
-          borderRadius: "48px",
-          color: "white",
-        },
-        outlinedPrimary: {
-          minWidth: "180px",
-          color: "black",
-        },
-        filledPrimary: {
-          color: "white",
-        },
-      },
-    },
-  },
+  // MuiButton: {
+  //   defaultProps: {
+  //     // disableRipple: true, // No more ripple!
+  //   },
+  //   styleOverrides: {
+  //     root: {
+  //       textTransform: "none" as const,
+  //       boxShadow: "none",
+  //       fontSize: "15px",
+  //       "&:hover": {
+  //         boxShadow: "none",
+  //       },
+  //       containedPrimary: {
+  //         minWidth: "140px",
+  //         background: "black",
+  //         borderRadius: "48px",
+  //         color: "white",
+  //       },
+  //       outlinedPrimary: {
+  //         minWidth: "180px",
+  //         color: "black",
+  //       },
+  //       filledPrimary: {
+  //         color: "white",
+  //       },
+  //     },
+  //   },
+  // },
   MuiTextField: {
     styleOverrides: {
       root: {
         marginTop: 15,
+        "& .MuiOutlinedInput-root": {
+          "& fieldset": {
+            borderColor: "#8338ec",
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: "#8338ec",
+          },
+        },
       },
     },
   },
@@ -164,23 +164,6 @@ const components = {
       },
     },
   },
-  // MuiBottomNavigation: {
-  //   styleOverrides: {
-  //     root: {
-  //       background: "#3d405b",
-  //       color: "white",
-  //     },
-  //   },
-  // },
-  // MuiBottomNavigationAction: {
-  //   styleOverrides: {
-  //     root: {
-  //       "&.Mui-selected": {
-  //         color: "white",
-  //       },
-  //     },
-  //   },
-  // },
   MuiFormControlLabel: {
     styleOverrides: {
       label: {
@@ -198,6 +181,18 @@ const components = {
         "&.Mui-selected": {
           fontSize: "0.75rem",
           padding: 1,
+        },
+      },
+    },
+  },
+  MuiDivider: {
+    styleOverrides: {
+      root: {
+        "&::before": {
+          borderTop: `thin solid #8338ec`,
+        },
+        "&::after": {
+          borderTop: `thin solid #8338ec`,
         },
       },
     },

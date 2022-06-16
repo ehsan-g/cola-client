@@ -8,14 +8,14 @@ import { Config, ThemeType } from "../../redux/types/types";
 const baseTheme = {
   palette: {
     primary: {
-      main: "#1a97f5",
+      main: "#00964b",
       light: "#e6f4ff",
-      dark: "#16g82d4",
+      dark: "#1674f4",
     },
     secondary: {
       main: "#8338ec",
       light: "#f2cc8f",
-      dark: "#173f98",
+      dark: "#00c292",
       contrastText: "#ffcc00",
     },
     success: {
@@ -60,12 +60,10 @@ const themesOptions = [
       primary: {
         main: "#4ea4e2",
         light: "#e6f4ff",
-        dark: "#16g82d4",
+        dark: "#ddeb23",
       },
       secondary: {
-        main: "#1e4db7",
-        light: "#ddebff",
-        dark: "#173f98",
+        // main: "#4ea4e2",
       },
     },
   },
@@ -73,12 +71,12 @@ const themesOptions = [
     name: ThemeType.COKE,
     palette: {
       primary: {
-        main: "#f2d5d3",
+        main: "#d43653",
         light: "#fce6ed",
-        dark: "#d43653",
+        dark: "#f2d5d3",
       },
       secondary: {
-        main: "#5e244d",
+        main: "#fce6ed",
       },
     },
   },
@@ -96,8 +94,8 @@ export const BuildTheme = (config: Config) => {
       },
       text: {
         primary:
-          customize.activeMode === "dark" ? "white" : "rgba(0, 0, 0, 0.87)",
-        secondary: customize.activeMode === "dark" ? "white" : "#777e89",
+          customize.activeMode === "dark" ? "#ffff" : "rgba(0, 0, 0, 0.87)",
+        secondary: customize.activeMode === "dark" ? "#d36b23" : "#777e89",
       },
     },
   };

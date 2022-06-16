@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/app/store";
 import CustomBottomNavigation from "../../components/container/CustomBottomNavigation";
 import CustomAppBar from "../../components/container/CustomAppBar";
+import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const MainWrapper = experimentalStyled("div")(() => ({
   display: "flex",
@@ -23,7 +26,28 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
 }));
 
 const FullLayout = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirect = location.search
+    ? // eslint-disable-next-line no-restricted-globals
+      location.search.split("redirect=")[1]
+    : "/";
+
   const customize = useSelector((state: RootState) => state.custumize);
+
+  const { status } = useAppSelector((state) => state.user);
+
+  const userInfo = localStorage.getItem("userInfo")
+    ? localStorage.getItem("userInfo")
+    : false;
+
+  useEffect(() => {
+    if (status !== "succeeded" && !userInfo) {
+      navigate(`/auth/login${redirect}`);
+    }
+  }, [redirect, status, navigate, userInfo]);
+
   return (
     <MainWrapper className={customize.activeMode === "light" ? "dark" : ""}>
       <PageWrapper>

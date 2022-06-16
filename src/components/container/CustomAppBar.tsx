@@ -13,7 +13,7 @@ export default function CustomAppBar() {
       spacing={2}
       sx={{ position: "fixed", flexGrow: 1, left: 0, right: 0 }}
     >
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="secondary">
         <Toolbar>
           <IconButton
             edge="start"
