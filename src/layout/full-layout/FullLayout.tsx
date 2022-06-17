@@ -1,12 +1,13 @@
 import { experimentalStyled, Container, Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import type { RootState } from "../../redux/app/store";
 import CustomBottomNavigation from "../../components/container/CustomBottomNavigation";
 import CustomAppBar from "../../components/container/CustomAppBar";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { fetchProfile } from "../../redux/features/auth/userSlice";
 
 const MainWrapper = experimentalStyled("div")(() => ({
   display: "flex",
@@ -35,22 +36,22 @@ const FullLayout = () => {
       location.search.split("redirect=")[1]
     : "";
 
-  const customize = useSelector((state: RootState) => state.custumize);
+  const customize = useAppSelector((state: RootState) => state.custumize);
 
-  const { profile, user } = useAppSelector((state) => state.user);
+  const { profile } = useAppSelector((state) => state.user);
+  const { buildings } = useAppSelector((state) => state.buildings);
 
   useEffect(() => {
-    if (!user && !profile) {
-      console.log("hala");
+    if (!profile) {
       navigate(`/auth/login${redirect}`);
     }
-  }, [redirect, user, profile]);
+  }, [dispatch, navigate, buildings]);
 
   return (
     <MainWrapper className={customize.activeMode === "light" ? "dark" : ""}>
       <PageWrapper>
-        <Container maxWidth={false}>
-          <CustomAppBar />
+        <CustomAppBar />
+        <Container maxWidth={false} sx={{ margin: "auto" }}>
           <Box
             sx={{
               minHeight: "calc(100vh - 170px)",
@@ -59,8 +60,8 @@ const FullLayout = () => {
           >
             <Outlet />
           </Box>
-          <CustomBottomNavigation />
         </Container>
+        <CustomBottomNavigation />
       </PageWrapper>
     </MainWrapper>
   );

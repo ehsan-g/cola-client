@@ -51,16 +51,16 @@ function Login() {
   const { user, profile } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (user && !profile) {
+    if (!profile) {
       dispatch(fetchProfile());
     }
-  }, [user, profile, dispatch]);
+  }, [user]);
 
   useEffect(() => {
-    if (user) {
+    if (profile) {
       navigate(`/settings${redirect}`);
     }
-  }, [redirect, navigate, user]);
+  }, [redirect, navigate, profile]);
 
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(LoginSchema),

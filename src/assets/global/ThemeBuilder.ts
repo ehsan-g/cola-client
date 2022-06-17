@@ -1,9 +1,10 @@
 import _ from "lodash";
 import { createTheme } from "@mui/material/styles";
-import { useSelector } from "react-redux";
+
 import components from "./Override";
 import type { RootState } from "../../redux/app/store";
-import { Config, ThemeType } from "../../redux/types/types";
+import { ThemeConfig, ThemeType } from "../../redux/types/types";
+import { useAppSelector } from "../../redux/app/hooks";
 
 const baseTheme = {
   palette: {
@@ -82,9 +83,9 @@ const themesOptions = [
   },
 ];
 
-export const BuildTheme = (config: Config) => {
+export const BuildTheme = (config: ThemeConfig) => {
   let themeOptions = themesOptions.find((theme) => theme.name === config.theme);
-  const customize = useSelector((state: RootState) => state.custumize);
+  const customize = useAppSelector((state: RootState) => state.custumize);
   const baseMode = {
     palette: {
       mode: customize.activeMode,

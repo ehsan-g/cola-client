@@ -1,5 +1,30 @@
-export interface Config {
+export interface ThemeConfig {
   theme: string;
+}
+
+export interface AxiosConfig {
+  headers: {
+    "Content-Type": "application/json";
+    Authorization: any;
+  };
+}
+
+export interface User {
+  id: number;
+  first_name: string;
+  last_name: string;
+  profile_picture: string;
+  image: string;
+  permission_level: number;
+  created_at: string;
+  profile: {};
+}
+
+export interface LoginState {
+  user: {} | null;
+  status?: "idle" | "loading" | "succeeded" | "failed";
+  error?: string | undefined;
+  profile?: User | undefined;
 }
 
 export interface BuildingImage {
@@ -18,6 +43,22 @@ export interface Address {
   created_at: string;
   building: number;
 }
+
+export interface Floor {
+  id?: number;
+  title?: string;
+  permission_level: number;
+  building?: number;
+  rooms?: Room[];
+}
+
+export interface Room {
+  id?: number;
+  building?: number;
+  permission_level: number;
+  title?: string;
+}
+
 export interface Building {
   id?: number;
   building_name?: string;
@@ -25,6 +66,7 @@ export interface Building {
   company?: number;
   image?: BuildingImage;
   address?: Address;
+  floors?: Floor[];
 }
 
 export enum CompanyType {
@@ -41,16 +83,4 @@ export enum ThemeType {
 export enum ModeType {
   DARK = "dark",
   LIGHT = "light",
-}
-
-export enum UserType {
-  USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST",
-  USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS",
-  USER_LOGIN_FAIL = "USER_LOGIN_FAIL",
-  USER_LOGOUT = "USER_LOGOUT",
-
-  USER_REGISTER_REQUEST = "USER_REGISTER_REQUEST",
-  USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS",
-  USER_REGISTER_FAIL = "USER_REGISTER_FAIL",
-  USER_REGISTER_RESET = "USER_REGISTER_RESET",
 }

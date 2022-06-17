@@ -13,29 +13,6 @@ const components = {
         margin: 0,
         padding: 0,
       },
-      "#root": {
-        height: "100%",
-      },
-      "*[dir='rtl'] .buyNowImg": {
-        transform: "scaleX(-1)",
-      },
-
-      ".buyNowImg": {
-        position: "absolute",
-        right: "-44px",
-        top: "-18px",
-        width: "143px",
-        height: "175px",
-      },
-      ".MuiCardHeader-action": {
-        alignSelf: "center !important",
-      },
-      ".scrollbar-container": {
-        borderRight: "0 !important",
-      },
-      "*[dir='rtl'] .welcomebg:before": {
-        backgroundPosition: "top -24px left -9px !important",
-      },
     },
   },
   MuiContainer: {
@@ -63,7 +40,7 @@ const components = {
     styleOverrides: {
       subtitle2: {
         fontWeight: 800,
-        fontSize: "12px",
+        fontSize: "10px",
         lineHeight: "14px",
       },
       body1: {
