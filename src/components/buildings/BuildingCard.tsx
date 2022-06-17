@@ -1,23 +1,37 @@
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Grid } from "@mui/material";
+import {
+  AccordionSummary,
+  Accordion,
+  AccordionDetails,
+  Grid,
+} from "@mui/material";
 import { Building } from "../../redux/types/types";
-import { useNavigate } from "react-router-dom";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { SyntheticEvent, useState } from "react";
+import BuildingFloors from "./BuildingFloors";
 
 export default function BuildingCard({ building }: { building: Building }) {
-  const navigate = useNavigate();
+  const [expanded, setExpanded] = useState<string | false>(false);
+
+  const handleChange =
+    (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
   return (
     <Grid container>
-      <Card
-        sx={{
-          width: "100%",
-        }}
+      <Accordion
+        expanded={expanded === "panel1"}
+        onChange={handleChange("panel1")}
+        sx={{ width: "100%" }}
       >
-        <CardActionArea onClick={() => navigate(`/buildings/${building.id}`)}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
+        >
           <Grid container>
             <Grid item>
               <CardMedia
@@ -33,7 +47,7 @@ export default function BuildingCard({ building }: { building: Building }) {
             </Grid>
             <Grid item>
               <CardContent>
-                <Typography component="div" variant="h5">
+                <Typography component="div" variant="h6">
                   {building.building_name}
                 </Typography>
                 <Typography color="text.secondary" component="div">
@@ -42,8 +56,14 @@ export default function BuildingCard({ building }: { building: Building }) {
               </CardContent>
             </Grid>
           </Grid>
-        </CardActionArea>
-      </Card>
+        </AccordionSummary>
+        <AccordionDetails>
+          <BuildingFloors
+            buildingId={building.id}
+            floors={building.floors || []}
+          />
+        </AccordionDetails>
+      </Accordion>
     </Grid>
   );
 }

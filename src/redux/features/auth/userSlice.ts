@@ -1,46 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { publicApi } from "../../apis/base";
+import { AxiosConfig, LoginState } from "../../types/types";
 
 const userJson = localStorage.getItem("userInfo");
 const userInfo = userJson !== null ? JSON.parse(userJson) : null;
-
-export interface LoginState {
-  user: {} | null;
-  status?: "idle" | "loading" | "succeeded" | "failed";
-  error?: string | undefined;
-  profile?: {} | null;
-}
 
 const initialState: LoginState = {
   user: userInfo,
   status: "idle",
   error: "",
-  profile: null,
 };
 
-export interface Config {
-  headers: {
-    "Content-Type": "application/json";
-    Authorization: any;
-  };
-}
-
-const config: Config = {
+const config: AxiosConfig = {
   headers: {
     "Content-Type": "application/json",
     Authorization: "",
   },
 };
+
 export const fetchProfile = createAsyncThunk("profile", async () => {
   const userJson = localStorage.getItem("userInfo");
   const userInfo = userJson !== null ? JSON.parse(userJson) : null;
-  const config: Config = {
+  if (!userInfo) {
+    throw new Error("no user info in localstorage");
+  }
+  const config: AxiosConfig = {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${userInfo && userInfo.token}`,
     },
   };
-  console.log(config);
   const response = await publicApi.get("users/profile-view", config);
   return response.data;
 });
@@ -49,6 +38,10 @@ export const login = createAsyncThunk("login", async (values: LoginState) => {
   const response = await publicApi.post("users/login", values.user, config);
   return response.data;
 });
+
+export const logout = () => {
+  localStorage.removeItem("userInfo");
+};
 
 const userSlice = createSlice({
   name: "buildings",
@@ -80,6 +73,8 @@ const userSlice = createSlice({
       .addCase(fetchProfile.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+        logout();
+        console.log(action.error);
       });
   },
 });

@@ -13,7 +13,7 @@ const Error = Loadable(lazy(() => import("../pages/authentication/Error")));
 const Login = Loadable(lazy(() => import("../pages/authentication/Login")));
 
 const Buildings = Loadable(lazy(() => import("../pages/buildings")));
-const Building = Loadable(lazy(() => import("../pages/buildingView")));
+const Floors = Loadable(lazy(() => import("../pages/floors")));
 const Settings = Loadable(lazy(() => import("../pages/settings")));
 
 const Router = [
@@ -23,7 +23,7 @@ const Router = [
     children: [
       { path: "/", element: <Navigate to="/buildings" /> },
       { path: "buildings", element: <Buildings /> },
-      { path: "buildings/:id", element: <Building /> },
+      { path: "buildings/:buildingId/floor/:floorId", element: <Floors /> },
       { path: "settings", element: <Settings /> },
       { path: "*", element: <Navigate to="/auth/404" /> },
     ],

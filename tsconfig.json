@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "noEmit": true,
   },
-  "include": ["env.d.ts", "**/*.ts", "**/*.tsx", "src/setupProxy.ts"],
+  "include": ["env.d.ts", "**/*.ts", "**/*.tsx", "src/setupProxy.ts", "src/pages/floors.jsx"],
   "exclude": ["node_modules"],
 }
