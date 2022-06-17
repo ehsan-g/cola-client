@@ -15,6 +15,8 @@ import * as yup from "yup";
 import { fetchProfile, login } from "../../redux/features/auth/userSlice";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { User } from "../../redux/types/types";
+import { isEmpty } from "lodash";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -51,13 +53,13 @@ function Login() {
   const { user, profile } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (!profile) {
+    if (profile !== ({} as User)) {
       dispatch(fetchProfile());
     }
   }, [user]);
 
   useEffect(() => {
-    if (profile) {
+    if (isEmpty(profile) === false) {
       navigate(`/settings${redirect}`);
     }
   }, [redirect, navigate, profile]);

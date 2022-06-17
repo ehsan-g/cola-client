@@ -21,10 +21,10 @@ export interface User {
 }
 
 export interface LoginState {
-  user: {} | null;
+  user: User | {};
   status?: "idle" | "loading" | "succeeded" | "failed";
   error?: string | undefined;
-  profile?: User | undefined;
+  profile?: User;
 }
 
 export interface BuildingImage {
