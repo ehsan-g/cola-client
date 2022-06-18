@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import "../assets/styles.css";
 import VectorMap, { Layer, Tooltip, Label } from "devextreme-react/vector-map";
 import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
@@ -6,17 +5,10 @@ import type { RootState } from "../redux/app/store";
 import { ThemeType } from "../redux/types/types";
 import { useEffect, useState } from "react";
 import { ContextMenu } from "devextreme-react/context-menu";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Grid,
-  Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Divider, Grid, Typography } from "@mui/material";
 import { fetchEvents } from "../redux/features/buildings/eventsSlice";
-
+import EventAccordion from "../components/events/EventAccordion";
+import { useParams } from "react-router-dom";
 const projection = {
   to: ([l, lt]: [l: any, lt: any]) => [l / 100, lt / 100],
   from: ([x, y]: [x: any, y: any]) => [x * 100, y * 100],
@@ -29,17 +21,20 @@ export interface RoomDATA {
 
 export default function Floors() {
   const dispatch = useAppDispatch();
+  const { floorId } = useParams();
+
   const [wallsCord, setwallsCordCord] = useState();
   const [roomsCord, setRoomsCord] = useState([]);
   const [roomsList, setRoomsList] = useState([{}]);
   const [roomId, setRoomId] = useState();
-  const [expanded, setExpanded] = useState<string | false>(false);
 
   const customize = useAppSelector((state: RootState) => state.custumize);
 
   const { status: buildingStatus, buildings } = useAppSelector(
     (state) => state.buildings
   );
+
+  const { events } = useAppSelector((state) => state.events);
 
   // coordinates
   useEffect(() => {
@@ -104,13 +99,13 @@ export default function Floors() {
     }
   };
 
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
-    };
-
   return (
     <>
+      <Grid container>
+        <Typography variant="subtitle1" color="secondary.dark">
+          Floor Id: {floorId}
+        </Typography>
+      </Grid>
       {buildingData && roomsData.features[1] && (
         <VectorMap
           id="vector-map"
@@ -118,8 +113,6 @@ export default function Floors() {
           projection={projection}
           onClick={clickHandler}
         >
-          <ContextMenu onItemClick={() => console.log("click")} />
-
           <Layer
             dataSource={wallsCord && buildingData}
             hoverEnabled={false}
@@ -138,60 +131,33 @@ export default function Floors() {
           <Tooltip enabled={true} customizeTooltip={customizeTooltip}></Tooltip>
         </VectorMap>
       )}
+      <Divider
+        variant="middle"
+        sx={{
+          marginBottom: 4,
+          borderColor: customize.activeMode === "light" ? "black" : "white",
+        }}
+      />
+
       {roomId && (
-        <Box
-          sx={{
-            opacity: 10,
-            mt: 10,
-            borderRadius: 10,
-            margin: "auto",
-            width: 300,
-            height: 300,
-            backgroundColor: "primary.dark",
-          }}
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
         >
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Grid item>
-              <Typography variant="subtitle1" color="secondary.dark">
-                {roomId}hi
-              </Typography>
-            </Grid>
-            <Grid item>
-              {roomsList?.map((room, index) => (
-                <Accordion
-                  expanded={expanded === "panel1"}
-                  onChange={handleChange("panel1")}
-                  key={index}
-                >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                  >
-                    <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                      General settings
-                    </Typography>
-                    <Typography sx={{ color: "text.secondary" }}>
-                      I am an accordion
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      Nulla facilisi. Phasellus sollicitudin nulla et quam
-                      mattis feugiat. Aliquam eget maximus est, id dignissim
-                      quam.
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
-              ))}
-            </Grid>
+          <Grid item>
+            <Typography variant="subtitle1" color="secondary.dark">
+              Room Id: {roomId}
+            </Typography>
           </Grid>
-        </Box>
+          <Grid item sx={{ mb: 10, minWidth: "100%" }}>
+            {events &&
+              events?.map((event: any, index: number) => (
+                <EventAccordion key={index} event={event} />
+              ))}
+          </Grid>
+        </Grid>
       )}
     </>
   );

@@ -54,7 +54,8 @@ const FullLayout = () => {
           <Box
             sx={{
               minHeight: "calc(100vh - 170px)",
-              paddingTop: "60px",
+              paddingTop: "30px",
+              paddingBottom: "30px",
             }}
           >
             <Outlet />

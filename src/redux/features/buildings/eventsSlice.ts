@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { publicApi } from "../../apis/base";
-import { Building } from "../../types/types";
 
 export interface EventState {
   events: object[];
@@ -53,15 +52,13 @@ const eventsSlice = createSlice({
       })
       .addCase(fetchEvents.fulfilled, (state, action) => {
         state.events = [];
-        const loadedBuildings = action.payload.events.map(
-          (building: Building) => {
-            return building;
-          }
-        );
+        const loadingEvents = action.payload.events.map((event: Event) => {
+          return event;
+        });
+        console.log(action);
         state.status = "succeeded";
-
         // Add any fetched events to the array
-        state.events = state.events.concat(loadedBuildings);
+        state.events = state.events.concat(loadingEvents);
       })
       .addCase(fetchEvents.rejected, (state, action) => {
         state.status = "failed";
