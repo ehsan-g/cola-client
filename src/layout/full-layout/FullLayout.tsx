@@ -40,10 +40,7 @@ const FullLayout = () => {
   const { profile } = useAppSelector((state) => state.user);
   const { buildings } = useAppSelector((state) => state.buildings);
 
-  console.log(isEmpty(profile)); // undefined
-
   useEffect(() => {
-    console.log(profile);
     if (isEmpty(profile)) {
       navigate(`/auth/login${redirect}`);
     }
