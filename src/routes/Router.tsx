@@ -13,7 +13,7 @@ const Error = Loadable(lazy(() => import("../pages/authentication/Error")));
 const Login = Loadable(lazy(() => import("../pages/authentication/Login")));
 
 const Buildings = Loadable(lazy(() => import("../pages/buildings")));
-const Floors = Loadable(lazy(() => import("../pages/floors")));
+const Floors = Loadable(lazy(() => import("../pages/floor")));
 const Settings = Loadable(lazy(() => import("../pages/settings")));
 
 const Router = [

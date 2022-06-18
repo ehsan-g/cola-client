@@ -45,17 +45,11 @@ const BuildingFloors = ({
               const labelId = `checkbox-list-label-${floor.id}`;
 
               return (
-                <ListItem
-                  key={floor.id}
-                  disabled={
-                    profile &&
-                    profile.permission_level >= floor.permission_level
-                  }
-                >
+                <ListItem key={floor.id}>
                   <ListItemButton
                     disabled={
                       profile &&
-                      profile.permission_level >= floor.permission_level
+                      profile.permission_level <= floor.permission_level
                     }
                     role={undefined}
                     onClick={() =>
@@ -80,7 +74,7 @@ const BuildingFloors = ({
                     />
                     <ListItemIcon sx={{ justifyContent: "center" }}>
                       {profile &&
-                      profile.permission_level >= floor.permission_level ? (
+                      profile.permission_level <= floor.permission_level ? (
                         <LockOpenIcon color="warning" />
                       ) : (
                         <CheckCircleOutlineIcon color="success" />

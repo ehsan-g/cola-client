@@ -1,13 +1,12 @@
 import { experimentalStyled, Container, Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
-
 import type { RootState } from "../../redux/app/store";
 import CustomBottomNavigation from "../../components/container/CustomBottomNavigation";
 import CustomAppBar from "../../components/container/CustomAppBar";
 import { useAppDispatch, useAppSelector } from "../../redux/app/hooks";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { fetchProfile } from "../../redux/features/auth/userSlice";
+import { isEmpty } from "lodash";
 
 const MainWrapper = experimentalStyled("div")(() => ({
   display: "flex",
@@ -42,10 +41,10 @@ const FullLayout = () => {
   const { buildings } = useAppSelector((state) => state.buildings);
 
   useEffect(() => {
-    if (!profile) {
+    if (isEmpty(profile)) {
       navigate(`/auth/login${redirect}`);
     }
-  }, [dispatch, navigate, buildings]);
+  }, [dispatch, navigate, buildings, profile]);
 
   return (
     <MainWrapper className={customize.activeMode === "light" ? "dark" : ""}>

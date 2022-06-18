@@ -6,6 +6,7 @@ import { ThunkAction, Action } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import buildingsReducer from "../features/buildings/buildingsSlice";
 import userReducer from "../features/auth/userSlice";
+import eventReducer from "../features/buildings/eventsSlice";
 
 const sentryReduxEnhancer = Sentry.createReduxEnhancer({
   actionTransformer: (action) => {
@@ -26,8 +27,9 @@ const preloadedState = {};
 
 const reducer = {
   custumize: customizeReducer,
-  buildings: buildingsReducer,
   user: userReducer,
+  buildings: buildingsReducer,
+  events: eventReducer,
 };
 
 export const store = configureStore({

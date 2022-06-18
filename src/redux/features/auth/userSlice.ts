@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { publicApi } from "../../apis/base";
-import { AxiosConfig, LoginState } from "../../types/types";
+import { AxiosConfig, LoginState, User } from "../../types/types";
 
 const userJson = localStorage.getItem("userInfo");
 const userInfo = userJson !== null ? JSON.parse(userJson) : null;
@@ -9,6 +9,7 @@ const initialState: LoginState = {
   user: userInfo,
   status: "idle",
   error: "",
+  profile: {} as User,
 };
 
 const config: AxiosConfig = {
@@ -39,14 +40,16 @@ export const login = createAsyncThunk("login", async (values: LoginState) => {
   return response.data;
 });
 
-export const logout = () => {
-  localStorage.removeItem("userInfo");
-};
-
 const userSlice = createSlice({
   name: "buildings",
   initialState,
-  reducers: {},
+  reducers: {
+    logOut: (state) => {
+      localStorage.removeItem("userInfo");
+      state.user = {} as User;
+      state.profile = {} as User;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(login.pending, (state, action) => {
@@ -73,10 +76,10 @@ const userSlice = createSlice({
       .addCase(fetchProfile.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        logout();
-        console.log(action.error);
       });
   },
 });
+
+export const { logOut } = userSlice.actions;
 
 export default userSlice.reducer;

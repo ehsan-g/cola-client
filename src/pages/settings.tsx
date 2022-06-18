@@ -1,6 +1,13 @@
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Avatar, Badge, Grid, IconButton, Typography } from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import {
   changeMode,
   changeTheme,
@@ -11,6 +18,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ThemeType } from "../redux/types/types";
 import KeyIcon from "@mui/icons-material/Key";
+import { logOut } from "../redux/features/auth/userSlice";
 
 export default function Settings() {
   const dispatch = useAppDispatch();
@@ -69,7 +77,7 @@ export default function Settings() {
         >
           <Avatar
             alt="Remy Sharp"
-            src={profile ? profile.profile_picture : ""}
+            src={profile?.profile_picture}
             sx={{
               width: 100,
               height: 100,
@@ -122,6 +130,7 @@ export default function Settings() {
             )}
           </IconButton>
         </Box>
+        <Button onClick={() => dispatch(logOut())}>LogOut</Button>
         <ExAlert />
       </Grid>
     </Grid>
