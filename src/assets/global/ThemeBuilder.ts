@@ -64,7 +64,7 @@ const themesOptions = [
         dark: "#ddeb23",
       },
       secondary: {
-        // main: "#4ea4e2",
+        main: "#4ea4e2",
       },
     },
   },
@@ -91,7 +91,7 @@ export const BuildTheme = (config: ThemeConfig) => {
       mode: customize.activeMode,
       background: {
         default: customize.activeMode === "dark" ? "#20232a" : "#fafbfb",
-        paper: customize.activeMode === "dark" ? "#282C34" : "#ffffff",
+        paper: customize.activeMode === "dark" ? "#282C34" : "#fafbfb",
       },
       text: {
         primary:

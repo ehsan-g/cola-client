@@ -42,6 +42,8 @@ export default function Settings() {
       direction="column"
       justifyContent="center"
       alignItems="flex-end"
+      sx={{ mt: 6, width: "100%" }}
+      spacing={2}
     >
       <Grid item sx={{ width: "100%", textAlign: "center" }}>
         <Badge
@@ -130,7 +132,16 @@ export default function Settings() {
             )}
           </IconButton>
         </Box>
-        <Button onClick={() => dispatch(logOut())}>LogOut</Button>
+      </Grid>
+      <Grid item>
+        <Button
+          sx={{ margin: "auto", mb: 8 }}
+          onClick={() => dispatch(logOut())}
+        >
+          LogOut
+        </Button>
+      </Grid>
+      <Grid item sx={{ width: "100%" }}>
         <ExAlert />
       </Grid>
     </Grid>

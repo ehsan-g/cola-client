@@ -6,8 +6,16 @@ import PageContainer from "../../components/container/PageContainer";
 const ExAlert = () => {
   return (
     <PageContainer title="Alert" description="this is Alert page">
-      <Grid container spacing={0}>
-        <Grid item xs={12} lg={6} sm={6} display="flex" alignItems="stretch">
+      <Grid container spacing={0} sx={{ margin: "auto" }}>
+        <Grid
+          item
+          xs={12}
+          lg={6}
+          sm={6}
+          display="flex"
+          alignItems="stretch"
+          sx={{ margin: "auto" }}
+        >
           <BaseCard title="Filled Alert">
             <Stack spacing={1}>
               {/* <h3>{data.species.name}</h3> */}

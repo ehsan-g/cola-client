@@ -1660,7 +1660,7 @@
   dependencies:
     "@babel/runtime" "^7.17.2"
 
-"@mui/lab@^5.0.0-alpha.85":
+"@mui/lab@^5.0.0-alpha.86":
   version "5.0.0-alpha.86"
   resolved "https://registry.yarnpkg.com/@mui/lab/-/lab-5.0.0-alpha.86.tgz#83323e0ff17fdea641fa1d93be024413bf407ec3"
   integrity sha512-5dx9/vHldiE5KFu99YUtEGKyUgwTiq8wM+IhEnNKkU+YjEMULVYV+mgS9nvnf6laKtgqy2hOE4JivqRPIuOGdA==
@@ -1676,7 +1676,7 @@
     react-transition-group "^4.4.2"
     rifm "^0.12.1"
 
-"@mui/material@^5.8.3":
+"@mui/material@^5.8.4":
   version "5.8.4"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.8.4.tgz#b9cdae0c79ea770bc9cc3aafb7f750ed8ebe1b5d"
   integrity sha512-KlOJS1JGhwuhdoF4fulmz41h/YxyMdZSc+ncz+HAah0GKn8ovAs5774f1w0lIasxbtI1Ziunwvmnu9PvvUKdMw==
