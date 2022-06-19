@@ -69,6 +69,11 @@ export interface Building {
   floors?: Floor[];
 }
 
+export enum Join {
+  YES = 1,
+  NO = 0,
+}
+
 export enum CompanyType {
   NONE = 0,
   PEPSI = 1,

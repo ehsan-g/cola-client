@@ -100,66 +100,75 @@ export default function Floors() {
   };
 
   return (
-    <>
-      <Grid container>
+    <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid item>
         <Typography variant="subtitle1" color="secondary.dark">
           Floor Id: {floorId}
         </Typography>
       </Grid>
-      {buildingData && roomsData.features[1] && (
-        <VectorMap
-          id="vector-map"
-          maxZoomFactor={4}
-          projection={projection}
-          onClick={clickHandler}
-        >
-          <Layer
-            dataSource={wallsCord && buildingData}
-            hoverEnabled={false}
-            name="building"
-          ></Layer>
-          <Layer
-            dataSource={roomsData}
-            name="roomsCord"
-            borderWidth={1}
-            color={
-              customize.activeTheme === ThemeType.PEPSI ? "#e6f4ff" : "#fce6ed"
-            }
+      <Grid item sx={{ maxWidth: "100% !important", overflow: "scroll" }}>
+        {buildingData && roomsData.features[1] && (
+          <VectorMap
+            id="vector-map"
+            maxZoomFactor={4}
+            projection={projection}
+            onClick={clickHandler}
           >
-            <Label enabled={true} dataField="name"></Label>
-          </Layer>
-          <Tooltip enabled={true} customizeTooltip={customizeTooltip}></Tooltip>
-        </VectorMap>
-      )}
-      <Divider
-        variant="middle"
-        sx={{
-          marginBottom: 4,
-          borderColor: customize.activeMode === "light" ? "black" : "white",
-        }}
-      />
-
+            <Layer
+              dataSource={wallsCord && buildingData}
+              hoverEnabled={false}
+              name="building"
+            ></Layer>
+            <Layer
+              dataSource={roomsData}
+              name="roomsCord"
+              borderWidth={1}
+              color={
+                customize.activeTheme === ThemeType.PEPSI
+                  ? "#e6f4ff"
+                  : "#fce6ed"
+              }
+            >
+              <Label enabled={true} dataField="name"></Label>
+            </Layer>
+            <Tooltip
+              enabled={true}
+              customizeTooltip={customizeTooltip}
+            ></Tooltip>
+          </VectorMap>
+        )}
+      </Grid>
+      <Grid item>
+        <Divider
+          variant="middle"
+          sx={{
+            width: "100%",
+            margin: 4,
+            borderColor: customize.activeMode === "light" ? "black" : "white",
+          }}
+        />
+      </Grid>
       {roomId && (
-        <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-        >
+        <Grid item container>
           <Grid item>
             <Typography variant="subtitle1" color="secondary.dark">
               Room Id: {roomId}
             </Typography>
           </Grid>
-          <Grid item sx={{ mb: 10, minWidth: "100%" }}>
+          <Grid item sx={{ mb: 10, maxWidth: "100% !important" }}>
             {events &&
               events?.map((event: any, index: number) => (
-                <EventAccordion key={index} event={event} />
+                <EventAccordion key={index} event={event} roomId={roomId} />
               ))}
           </Grid>
         </Grid>
       )}
-    </>
+    </Grid>
   );
 }
 

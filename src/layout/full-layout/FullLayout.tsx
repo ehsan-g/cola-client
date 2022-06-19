@@ -1,4 +1,4 @@
-import { experimentalStyled, Container, Box } from "@mui/material";
+import { experimentalStyled, Container, Box, Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import type { RootState } from "../../redux/app/store";
 import CustomBottomNavigation from "../../components/container/CustomBottomNavigation";
@@ -49,12 +49,11 @@ const FullLayout = () => {
   return (
     <MainWrapper className={customize.activeMode === "light" ? "dark" : ""}>
       <PageWrapper>
-        <CustomAppBar />
-        <Container maxWidth={false} sx={{ margin: "auto" }}>
+        <Container maxWidth="sm" sx={{ margin: "auto" }}>
           <Box
             sx={{
-              minHeight: "calc(100vh - 170px)",
-              paddingTop: "30px",
+              minHeight: "calc(100vh - 200px)",
+              paddingTop: "20px",
               paddingBottom: "30px",
             }}
           >

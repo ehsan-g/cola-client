@@ -8,7 +8,7 @@ import {
   List,
 } from "@mui/material";
 import PageContainer from "../container/PageContainer";
-import { Floor } from "../../redux/types/types";
+import { Floor, ThemeType } from "../../redux/types/types";
 import { ListItemButton } from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
@@ -25,6 +25,7 @@ const BuildingFloors = ({
 }) => {
   const navigate = useNavigate();
 
+  const customize = useAppSelector((state) => state.custumize);
   const { profile } = useAppSelector((state) => state.user);
 
   return (
@@ -39,7 +40,17 @@ const BuildingFloors = ({
           }}
         >
           <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={{
+              width: "100%",
+              maxWidth: 360,
+              bgcolor: "background.paper",
+              border: "1px solid lightGrey",
+              borderRadius: 2,
+              boxShadow:
+                customize.activeTheme === ThemeType.COKE
+                  ? "0px 5px 50px 10px #fce6ed inset"
+                  : "20px 20px 50px 10px #e6f4ff inset",
+            }}
           >
             {floors.map((floor) => {
               const labelId = `checkbox-list-label-${floor.id}`;

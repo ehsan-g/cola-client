@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
+import CustomAppBar from "../components/container/CustomAppBar";
 import Loadable from "../layout/full-layout/loadable/Loadable";
 
 const FullLayout = Loadable(
@@ -19,7 +20,12 @@ const Settings = Loadable(lazy(() => import("../pages/settings")));
 const Router = [
   {
     path: "/",
-    element: <FullLayout />,
+    element: (
+      <>
+        <CustomAppBar />
+        <FullLayout />
+      </>
+    ),
     children: [
       { path: "/", element: <Navigate to="/buildings" /> },
       { path: "buildings", element: <Buildings /> },
