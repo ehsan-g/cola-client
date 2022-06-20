@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -7,6 +7,8 @@ import Paper from "@mui/material/Paper";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { matchPath, useLocation, Link } from "react-router-dom";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import { useAppSelector } from "../../redux/app/hooks";
 
 function useRouteMatch(patterns: readonly string[]) {
   const { pathname } = useLocation();
@@ -25,8 +27,11 @@ function useRouteMatch(patterns: readonly string[]) {
 export default function CustomBottomNavigation() {
   const ref = useRef<HTMLDivElement>(null);
 
-  const routeMatch = useRouteMatch(["/buildings", "/settings"]);
+  const routeMatch = useRouteMatch(["/buildings", "/profile", "/settings"]);
   const currentTab = routeMatch?.pattern?.path;
+  const [value, setValue] = useState(1);
+
+  const { profile } = useAppSelector((state) => state.user);
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
@@ -37,7 +42,10 @@ export default function CustomBottomNavigation() {
       >
         <BottomNavigation
           showLabels
-          value={currentTab === "/buildings" ? 0 : 1}
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
           color="primary"
         >
           <BottomNavigationAction
@@ -46,12 +54,21 @@ export default function CustomBottomNavigation() {
             label="Buildings"
             icon={<BusinessIcon />}
           />
+
           <BottomNavigationAction
             component={Link}
-            to="/settings"
-            label="Settings"
-            icon={<SettingsIcon />}
+            to="/profile"
+            label="Profile"
+            icon={<PermIdentityIcon />}
           />
+          {profile?.is_superuser && (
+            <BottomNavigationAction
+              component={Link}
+              to="/settings"
+              label="Admin Settings"
+              icon={<SettingsIcon />}
+            />
+          )}
         </BottomNavigation>
       </Paper>
     </Box>

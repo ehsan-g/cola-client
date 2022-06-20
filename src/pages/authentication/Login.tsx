@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Card,
   CardMedia,
@@ -50,7 +51,7 @@ function Login() {
       location.search.split("redirect=")[1]
     : "";
 
-  const { user, profile } = useAppSelector((state) => state.user);
+  const { user, profile, error } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (profile !== ({} as User)) {
@@ -60,7 +61,7 @@ function Login() {
 
   useEffect(() => {
     if (isEmpty(profile) === false) {
-      navigate(`/settings${redirect}`);
+      navigate(`/profile${redirect}`);
     }
   }, [redirect, navigate, profile]);
 
@@ -135,13 +136,13 @@ function Login() {
                 Login
               </Button>
             </Grid>
-            {/* {error && (
+            {error && (
               <Grid sx={{ marginTop: 2 }}>
-                <Alert variant="" severity="error">
+                <Alert variant="filled" severity="error">
                   {error}
                 </Alert>
               </Grid>
-            )} */}
+            )}
           </Grid>
           <Divider
             color="primary.light"

@@ -130,7 +130,7 @@ const components = {
       root: {
         marginTop: 6,
         fontSize: "0.75rem",
-        justifyContent: "center",
+        // justifyContent: "center",
       },
       outlinedError: {
         color: "#f44336",

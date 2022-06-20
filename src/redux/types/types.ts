@@ -8,6 +8,12 @@ export interface AxiosConfig {
     Authorization: any;
   };
 }
+export enum Company {
+  NONE = "None",
+  PEPSI = "Pepsi",
+  COKE = "Coke",
+  JOINED = "Joined",
+}
 
 export interface User {
   id: number;
@@ -17,6 +23,8 @@ export interface User {
   image: string;
   permission_level: number;
   created_at: string;
+  is_superuser: boolean;
+  company?: number;
   profile: {};
 }
 
@@ -69,18 +77,19 @@ export interface Building {
   floors?: Floor[];
 }
 
-export enum Join {
+export interface Join {
+  message: string;
+  isReg: "registered" | "left" | "N/A";
+  status: "idle" | "loading" | "succeeded" | "failed";
+}
+
+export enum IsReg {
   YES = 1,
   NO = 0,
 }
 
-export enum CompanyType {
-  NONE = 0,
-  PEPSI = 1,
-  COKE = 2,
-}
-
 export enum ThemeType {
+  NONE = "NONE",
   PEPSI = "PEPSI_THEME",
   COKE = "COKE_THEME",
 }

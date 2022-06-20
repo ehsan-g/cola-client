@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { publicApi } from "../../apis/base";
 import { Building } from "../../types/types";
-import userSlice from "../auth/userSlice";
 
 export interface BuildingState {
   buildings: object[];
@@ -39,14 +38,6 @@ export const fetchBuildings = createAsyncThunk(
   }
 );
 
-// export const addNewBuilding = createAsyncThunk(
-//   "buildings/addNewBuilding",
-//   async (data) => {
-//     const response = await axios.building(POSTS_URL, data);
-//     return response.data;
-//   }
-// );
-
 const buildingsSlice = createSlice({
   name: "buildings",
   initialState,
@@ -75,12 +66,5 @@ const buildingsSlice = createSlice({
       });
   },
 });
-
-// export const selectAllBuildings = (state) => state.buildings.buildings;
-// export const getBuildingsStatus = (state) => state.buildings.status;
-// export const getBuildingsError = (state) => state.buildings.error;
-
-// export const selectBuildingById = (state, buildingId) =>
-//   state.buildings.buildings.find((building) => building.id === buildingId);
 
 export default buildingsSlice.reducer;

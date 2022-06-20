@@ -25,19 +25,25 @@ export default function BuildingCard({ building }: { building: Building }) {
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
-        sx={{ width: "100%" }}
+        sx={{ width: "100%", margin: 1 }}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Grid container>
-            <Grid item>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <Grid item xs={3}>
               <CardMedia
                 component="img"
                 sx={{
                   maxWidth: 80,
+                  // maxHeight: "60vh",
                   borderRadius: 4,
                   border: "1px solid black",
                 }}
@@ -45,9 +51,20 @@ export default function BuildingCard({ building }: { building: Building }) {
                 alt="building"
               />
             </Grid>
-            <Grid item>
+            <Grid item xs={9}>
               <CardContent>
-                <Typography component="div" variant="h6">
+                <Typography
+                  sx={{
+                    flexShrink: 0,
+                    color: "text.primary",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    height: "1.2em",
+                    whiteSpace: "nowrap",
+                  }}
+                  variant="subtitle1"
+                  component="div"
+                >
                   {building.building_name}
                 </Typography>
                 <Typography color="text.secondary" component="div">

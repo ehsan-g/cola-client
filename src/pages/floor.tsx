@@ -4,11 +4,10 @@ import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
 import type { RootState } from "../redux/app/store";
 import { ThemeType } from "../redux/types/types";
 import { useEffect, useState } from "react";
-import { ContextMenu } from "devextreme-react/context-menu";
-import { Divider, Grid, Typography } from "@mui/material";
 import { fetchEvents } from "../redux/features/buildings/eventsSlice";
 import EventAccordion from "../components/events/EventAccordion";
 import { useParams } from "react-router-dom";
+import { Divider, Grid, Typography } from "@mui/material";
 const projection = {
   to: ([l, lt]: [l: any, lt: any]) => [l / 100, lt / 100],
   from: ([x, y]: [x: any, y: any]) => [x * 100, y * 100],
@@ -27,6 +26,7 @@ export default function Floors() {
   const [roomsCord, setRoomsCord] = useState([]);
   const [roomsList, setRoomsList] = useState([{}]);
   const [roomId, setRoomId] = useState();
+  // const [isAlert, setIsAlert] = useState<boolean>(false);
 
   const customize = useAppSelector((state: RootState) => state.custumize);
 
@@ -45,6 +45,10 @@ export default function Floors() {
       setRoomsCord(JSON.parse("[" + theLayout.room_coordinates + "]"));
     }
   }, [buildingStatus]);
+
+  // useEffect(() => {
+  //   setIsAlert(true);
+  // }, [joined]);
 
   const buildingData = {
     type: "FeatureCollection",
@@ -72,7 +76,7 @@ export default function Floors() {
             properties: {
               id: rooms[i].id,
               name: `Room ${i + 1}`,
-              square: 576,
+              title: rooms[i].title,
             },
             geometry: {
               type: "Polygon",
@@ -100,12 +104,7 @@ export default function Floors() {
   };
 
   return (
-    <Grid
-      container
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Grid container direction="column">
       <Grid item>
         <Typography variant="subtitle1" color="secondary.dark">
           Floor Id: {floorId}
@@ -147,19 +146,25 @@ export default function Floors() {
         <Divider
           variant="middle"
           sx={{
-            width: "100%",
+            // width: "100%",
             margin: 4,
             borderColor: customize.activeMode === "light" ? "black" : "white",
           }}
         />
       </Grid>
+      {/* {successEvents && (
+        <Alert
+          variant="filled"
+          severity="success"
+          onClose={() => {
+            setIsAlert(false);
+          }}
+        >
+          successful!
+        </Alert>
+      )} */}
       {roomId && (
         <Grid item container>
-          <Grid item>
-            <Typography variant="subtitle1" color="secondary.dark">
-              Room Id: {roomId}
-            </Typography>
-          </Grid>
           <Grid item sx={{ mb: 10, maxWidth: "100% !important" }}>
             {events &&
               events?.map((event: any, index: number) => (
@@ -174,7 +179,8 @@ export default function Floors() {
 
 function customizeTooltip(arg: any) {
   if (arg.layer.name === "roomsCord") {
-    return { text: `Square: ${arg.attribute("square")} ft&#178` };
+    console.log(arg.attribute("color"));
+    return { text: arg.attribute("title") };
   }
   return null;
 }

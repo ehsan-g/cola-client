@@ -33,62 +33,18 @@ export default function Settings() {
 
   const handleThemeChange = () => {
     if (!customize) return;
-    dispatch(changeTheme());
+    dispatch(changeTheme(1));
   };
 
   return (
     <Grid
       container
-      direction="column"
-      justifyContent="center"
-      alignItems="flex-end"
+      // direction="column"
+      // justifyContent="center"
+      // alignItems="flex-end"
       sx={{ mt: 6, width: "100%" }}
       spacing={2}
     >
-      <Grid item sx={{ width: "100%", textAlign: "center" }}>
-        <Badge
-          overlap="circular"
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          badgeContent={
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                width: "60px",
-                border:
-                  customize.activeMode === "dark"
-                    ? "1px solid white"
-                    : "1px solid black",
-                borderRadius: 50,
-                backgroundColor:
-                  customize.activeMode === "dark" ? "black" : "white",
-              }}
-            >
-              <Grid item xs={4}>
-                <Typography variant="caption" sx={{ margin: "auto" }}>
-                  {profile?.permission_level}
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <KeyIcon />
-              </Grid>
-            </Grid>
-          }
-          sx={{ margin: "auto" }}
-        >
-          <Avatar
-            alt="Remy Sharp"
-            src={profile?.profile_picture}
-            sx={{
-              width: 100,
-              height: 100,
-              margin: "auto",
-              boxShadow: 10,
-            }}
-          />
-        </Badge>
-      </Grid>
       <Grid item>
         <Box
           sx={{
@@ -132,14 +88,6 @@ export default function Settings() {
             )}
           </IconButton>
         </Box>
-      </Grid>
-      <Grid item>
-        <Button
-          sx={{ margin: "auto", mb: 8 }}
-          onClick={() => dispatch(logOut())}
-        >
-          LogOut
-        </Button>
       </Grid>
       <Grid item sx={{ width: "100%" }}>
         <ExAlert />

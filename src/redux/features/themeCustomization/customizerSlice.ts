@@ -18,12 +18,15 @@ export const custumizerSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    changeTheme: (state) => {
-      if (state.activeTheme === ThemeType.PEPSI) {
-        state.activeTheme = ThemeType.COKE;
-      } else if (state.activeTheme === ThemeType.COKE) {
-        state.activeTheme = ThemeType.PEPSI;
+    changeTheme: (state, action) => {
+      let theme;
+      if (action.payload === 2) {
+        theme = ThemeType.COKE;
+      } else {
+        theme = ThemeType.PEPSI;
       }
+
+      state.activeTheme = theme;
     },
     changeMode: (state) => {
       if (state.activeMode === ModeType.DARK) {
